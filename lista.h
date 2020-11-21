@@ -1,6 +1,4 @@
-#include "stdio.h"
-#include "stdlib.h"
-#include "nodo.c"
+#include "lista.c"
 
 
 
@@ -30,5 +28,18 @@ int isNodo(nodo *l , unsigned x, unsigned y);
  * @param y int - posicion y del nodo a buscar
  * @return nodo en la posicion correspondiente al nodo buscado o NULL si no está
 */
-nodo* getNodo(nodo *l, unsigned x, unsigned y);
+int getValueNodo(nodo *l, unsigned x, unsigned y);
 
+/**
+ * @descripcion inicializa una lista
+ * @param l - lista
+*/
+void *listaInit(lista* l);
+/**
+ * 
+ * @return lista leida desde archivo
+*/
+void rellenarMatriz(lista *l);
+
+
+void mostrarLista(lista *l);
