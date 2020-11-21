@@ -49,12 +49,6 @@ int getValueNodo(nodo *l, unsigned x, unsigned y){
     return 0;
 }
 
-void *listaInit(lista* l){
-    l->inside = NULL;
-    l->rows = 0;
-    l->cols = 0;
-}
-
 void rellenarMatriz(lista* l){
     FILE *fptr;
     int x,y = 0;
@@ -78,48 +72,54 @@ void rellenarMatriz(lista* l){
 
 void mostrarMatriz(lista* l){
     nodo * aux = l->inside;
- 
+    printf("la matriz resultante es: \n");
     for(unsigned i = 0; i < l->rows ; i++){
         for(unsigned j = 0; j< l->cols; j++){
-            int in = isNodo(aux, i,j);
-            if(in){
-                printf(" %d ", aux->valor);
-                aux = aux->next;
-            } else {
-                printf(" 0 ");
-            }
-            printf("\n");
+            printf("  %d  ", getValueNodo(aux, i,j));
         }
+        printf("\n");
     }
 }
 
-void mostrarLista(lista* l){
-    nodo* aux = l->inside;
-    while(aux != NULL){
-        printf(" %d ", aux->valor);
-        aux = aux->next;
-    }
-}
 
-lista* multiplicarMatriz(lista* l,lista *n){
+void multiplicarMatriz(lista* l, lista* n, lista *r){
     nodo * aux = NULL;
-    lista* final = NULL;
     int x = 0;
     for (int i = 0; i < l->rows; i++) { 
         for (int j = 0; j < l->cols; j++) {
             x =  0;
             for (int k = 0; k < l->rows; k++){
                 int valueNodoA = getValueNodo(l->inside, i, k);
-                int valueNodoB = getValueNodo(l->inside, k, j);
-                x = valueNodoA + valueNodoB;
+                int valueNodoB = getValueNodo(n->inside, k, j);
+                x+= valueNodoA * valueNodoB;
             }
-            if( x != 0 ){
+            if(x != 0){
                 aux = push(aux, x, i, j);
             }
         }
     }
-    final->cols = l->cols;
-    final->rows = l->rows;
-    final->inside = aux;
-    return final;
+    r->cols = l->cols;
+    r->rows = l->rows;
+    r->inside = aux;
+}
+
+void multiplicarRecursivo(lista *l, lista *n, lista* r, int contador){
+    if(contador == 1){
+        return;
+    }
+    multiplicarMatriz(l,n,r);
+    multiplicarRecursivo(l,r,r,contador - 1);
+}
+
+void calculateMemory(lista *l){
+    nodo * aux = l->inside;
+    int possibleMemory, totalMemory = 0;
+    while(aux != NULL){
+        totalMemory += 1;
+        aux = aux->next;
+    }
+    totalMemory = totalMemory * 4;
+    possibleMemory = l->cols * l->rows * 4;
+    printf("tamano en memoria de la matriz de entrada es: %d bytes \n", totalMemory);
+    printf("tamano en memoria de la matriz completa hubiera sido: %d \n", possibleMemory);
 }

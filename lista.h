@@ -41,5 +41,17 @@ void *listaInit(lista* l);
 */
 void rellenarMatriz(lista *l);
 
-
+/**
+ * 
+ * 
+*/
 void mostrarLista(lista *l);
+
+/**
+ * 
+ * 
+*/
+void multiplicarRecursivo(lista *l, lista *n, lista* r, int contador);
+
+
+void calculateMemory(lista *l);

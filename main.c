@@ -2,13 +2,17 @@
 #include "lista.h"
 
 
+
 int main(){
-    lista *l;
-    listaInit(l);
+
+    lista *l = malloc(sizeof(lista));
+    lista *n = malloc(sizeof(lista));
+    lista *r = malloc(sizeof(lista));
     rellenarMatriz(l);
-    mostrarLista(l);
-    l = multiplicarMatriz(l,l);
-    mostrarLista(l);
+    multiplicarRecursivo(l,l,r, 3);
+    mostrarMatriz(r);
+    calculateMemory(r);
+    
     return 0;
 }
 
