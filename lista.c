@@ -81,7 +81,6 @@ void mostrarMatriz(lista* l){
     }
 }
 
-
 void multiplicarMatriz(lista* l, lista* n, lista *r){
     nodo * aux = NULL;
     int x = 0;
@@ -118,8 +117,8 @@ void calculateMemory(lista *l){
         totalMemory += 1;
         aux = aux->next;
     }
-    totalMemory = totalMemory * 4;
-    possibleMemory = l->cols * l->rows * 4;
+    totalMemory = totalMemory * 4 * 3;
+    possibleMemory = l->cols * l->rows * 4 * 3;
     printf("tamano en memoria de la matriz de entrada es: %d bytes \n", totalMemory);
-    printf("tamano en memoria de la matriz completa hubiera sido: %d \n", possibleMemory);
+    printf("tamano en memoria de la matriz completa hubiera sido: %d bytes\n", possibleMemory);
 }
